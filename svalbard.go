@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/mesogii/svld/core"
-	"github.com/mesogii/svld/util"
+	"github.com/mesogii/svalbard/core"
+	"github.com/mesogii/svalbard/util"
 
 	"fmt"
 	"os"
@@ -22,20 +22,14 @@ const usage = `Itty Bitty encryption utility.
 
 func main() {
 
+	// Initialize a new CLI app
 	app := cli.NewApp()
 	app.Name = "Svalbard"
 	app.Usage = usage
 	app.Version = version
 	app.Commands = commands()
 
-	app.Flags = []cli.Flag {
-		cli.StringFlag{
-			Name: "lang",
-			Value: "english",
-			Usage: "language for the greeting",
-		},
-	}
-
+	// Define default action
 	app.Action = func(c *cli.Context) error {
 		fmt.Println("svld help - for usage options")
 		return nil
@@ -46,6 +40,8 @@ func main() {
 
 }
 
+
+// CLI Command Objects
 func commands() []cli.Command {
 	return []cli.Command{
 
@@ -91,11 +87,24 @@ func commands() []cli.Command {
 			Usage:       "options for svalbard keys",
 			Subcommands: []cli.Command{
 				{
+					Name:  "list",
+					Usage: "list all key files",
+					Action: func(c *cli.Context) {
+
+						err := core.KeyListIntf()
+
+						if err != nil {
+							util.Error(err)
+						}
+
+					},
+				},
+				{
 					Name:  "gen",
 					Usage: "generate a new svalbard key",
 					Action: func(c *cli.Context) {
 
-						err := core.Key_Gen_Intf(c.Args().First())
+						err := core.KeyGenIntf(c.Args().First())
 
 						if err != nil {
 							util.Error(err)
@@ -104,10 +113,13 @@ func commands() []cli.Command {
 				},
 				{
 					Name:  "remove",
-					Usage: "remove an existing template",
-					Action: func(c *cli.Context) error {
-						fmt.Println("removed task template: ", c.Args().First())
-						return nil
+					Usage: "remove an existing key file",
+					Action: func(c *cli.Context) {
+						err := core.KeyRemoveIntf(c.Args().First())
+
+						if err != nil {
+							util.Error(err)
+						}
 					},
 				},
 			},

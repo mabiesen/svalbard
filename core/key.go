@@ -1,17 +1,23 @@
 package core
 
 import (
-	"github.com/mesogii/svld/util"
+	"github.com/mesogii/svalbard/util"
 
 	"io/ioutil"
-	"strings"
 	"path"
 	"crypto/rand"
 )
 
 
 
-func Key_Gen_Intf(kn string) error {
+func KeyListIntf() error {
+
+	util.Notice("List all key files")
+
+	return nil
+}
+
+func KeyGenIntf(kn string) error {
 
 	if kn == "" {
 		return NO_KEY_NAME_PROVIDED
@@ -35,6 +41,15 @@ func Key_Gen_Intf(kn string) error {
 	return nil
 }
 
+func KeyRemoveIntf(kn string) error {
+
+	util.Notice("Remove key file, " + kn)
+
+	return nil
+}
+
+
+// Generate a new AES Key
 func generateKey() []byte {
 	key := make([]byte, 32)
 
@@ -46,11 +61,14 @@ func generateKey() []byte {
 	return key
 }
 
+// Check if key file already exists in Svalbard base dir
 func keyExists(kn string) bool {
 	fn := ""
 	keys_dir := util.KeysDir()
 	new_key_name := keyFileName(kn)
 
+
+	// Read from keys directory
 	keys, _ := ioutil.ReadDir(keys_dir)
 	for _, f := range keys {
 		fn = f.Name()
@@ -62,9 +80,9 @@ func keyExists(kn string) bool {
 	return false
 }
 
-func keyFileName(fp string) string {
-	sp := strings.Split(path.Base(fp), ".")
 
-	new_name := sp[0] + ".key"
+// Generate name for newly created key file
+func keyFileName(fp string) string {
+	new_name := fp + ".hem"
 	return new_name
 }
