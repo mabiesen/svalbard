@@ -11,3 +11,8 @@ func Error(err error) {
 func Notice(n string) {
 	fmt.Println("NOTICE: ",n)
 }
+
+//Prints each key file name to the terminal
+func PrintKeyFile(n string) {
+	fmt.Println(n)
+}
