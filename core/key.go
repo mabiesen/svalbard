@@ -12,12 +12,16 @@ import (
 
 func KeyListIntf() error {
 
-		util.Notice("List all key files")
+		util.Notice("All key files will now be listed \n")
 		files, _ := ioutil.ReadDir(util.KeysDir())
-		for _, f := range files {
-			util.PrintKeyFile(f.Name())
-	}
-	return nil
+		if len(files) == 0 {
+			util.Notice("No keys were found on your device.")
+		} else {
+			for _, f := range files {
+				util.PrintFileName(f.Name())
+			}
+		}
+		return nil
 }
 
 func KeyGenIntf(kn string) error {

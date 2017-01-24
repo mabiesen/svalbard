@@ -4,7 +4,6 @@ import (
 	"github.com/mesogii/svalbard/core"
 	"github.com/mesogii/svalbard/util"
 
-	"fmt"
 	"os"
 
 	"github.com/urfave/cli"
@@ -31,7 +30,7 @@ func main() {
 
 	// Define default action
 	app.Action = func(c *cli.Context) error {
-		fmt.Println("svld help - for usage options")
+		util.Notice("svld help - for usage options")
 		return nil
 	}
 
@@ -68,6 +67,7 @@ func commands() []cli.Command {
 			Aliases: []string{"d"},
 			Usage:   "decrypt a file",
 			Action:  func(c *cli.Context){
+
 				filepath := ""
 				if c.NArg() > 0 {
 					filepath = c.Args().Get(0)
@@ -80,7 +80,6 @@ func commands() []cli.Command {
 				}
 			},
 		},
-
 		{
 			Name:        "key",
 			Aliases:     []string{"k"},
@@ -96,7 +95,6 @@ func commands() []cli.Command {
 						if err != nil {
 							util.Error(err)
 						}
-
 					},
 				},
 				{
