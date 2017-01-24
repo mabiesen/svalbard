@@ -16,3 +16,7 @@ func Notice(n string) {
 func PrintKeyFile(n string) {
 	fmt.Println(n)
 }
+
+func NoKeysExist(){
+	fmt.Println("No keys were found on your device")
+}
