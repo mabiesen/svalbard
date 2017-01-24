@@ -2,6 +2,8 @@ package util
 
 import (
 	"fmt"
+	"strings"
+	"path/filepath"
 )
 
 func Error(err error) {
@@ -14,9 +16,6 @@ func Notice(n string) {
 
 //Prints each key file name to the terminal
 func PrintKeyFile(n string) {
-	fmt.Println(n)
-}
-
-func NoKeysExist(){
-	fmt.Println("No keys were found on your device")
+	fname := strings.TrimSuffix(n, filepath.Ext(n))
+	fmt.Println(fname)
 }
