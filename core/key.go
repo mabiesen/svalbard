@@ -18,7 +18,7 @@ func KeyListIntf() error {
 			util.Notice("No keys were found on your device.")
 		} else {
 			for _, f := range files {
-				util.PrintKeyFile(f.Name())
+				util.PrintFileName(f.Name())
 			}
 		}
 		return nil

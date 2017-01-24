@@ -1,6 +1,7 @@
 package core
 
 import (
+	"github.com/mesogii/svalbard/util"
 	"io/ioutil"
 	"path"
 	"strings"
@@ -34,6 +35,10 @@ func EncryptIntf(fp string) error {
 
 	if err != nil {
 		return CREATE_ENCRYPTED_FILE_ERROR
+	} else {
+		util.Notice("The encryption was successful.\nWould you like to delete the original file? (y/n)")
+		answer := util.RecurCompareInput("y","n")
+		util.Notice(answer)
 	}
 
 	// decrypt and print the original file
