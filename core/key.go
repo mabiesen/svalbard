@@ -12,8 +12,11 @@ import (
 
 func KeyListIntf() error {
 
-	util.Notice("List all key files")
-
+		util.Notice("List all key files")
+		files, _ := ioutil.ReadDir(util.KeysDir())
+		for _, f := range files {
+			util.PrintKeyFile(f.Name())
+	}
 	return nil
 }
 
