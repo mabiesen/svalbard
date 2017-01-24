@@ -12,7 +12,7 @@ import (
 
 func KeyListIntf() error {
 
-		util.Notice("All key files will now be listed")
+		util.Notice("All key files will now be listed \n")
 		files, _ := ioutil.ReadDir(util.KeysDir())
 		if len(files) == 0 {
 			util.Notice("No keys were found on your device.")
