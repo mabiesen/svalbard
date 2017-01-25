@@ -8,6 +8,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+	"os"
 )
 
 
@@ -38,7 +39,12 @@ func EncryptIntf(fp string) error {
 	} else {
 		util.Notice("The encryption was successful.\nWould you like to delete the original file? (y/n)")
 		answer := util.RecurCompareInput("y","n")
-		util.Notice(answer)
+		if answer == "y" {
+			var err = os.Remove(fp)
+			if err != nil {
+				return DELETE_UNENCRYPTED_FILE_ERROR
+			}
+		}
 	}
 
 	// decrypt and print the original file
