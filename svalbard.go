@@ -9,7 +9,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-const version = "0.1.6"
+const version = "0.1.7"
 
 const usage = `Itty Bitty encryption utility.
 
@@ -43,7 +43,14 @@ func main() {
 // CLI Command Objects
 func commands() []cli.Command {
 	return []cli.Command{
-
+		{
+			Name:    "version",
+			Aliases: []string{"v"},
+			Usage:   "print the version",
+			Action:  func(c *cli.Context) {
+				util.Print(version)
+			},
+		},
 		{
 			Name:    "encrypt",
 			Aliases: []string{"e"},
