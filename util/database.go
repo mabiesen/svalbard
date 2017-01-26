@@ -60,4 +60,5 @@ func RetrieveDB(fp string, key []byte) {
 	if err != nil {
 			log.Fatal(err)
 	}
+	db.Close()
 }
