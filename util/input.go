@@ -13,9 +13,7 @@ func RecurCompareInput(affirmative string , negative string)string{
 		var answer string
 
 		for{
-			reader1 := bufio.NewReader(os.Stdin)
-			userInput, _ := reader1.ReadString('\n')
-			theInput := strings.TrimSpace(userInput)
+			theInput := ScanForInput()
 			if theInput == affirmative || theInput == negative {
 				answer = theInput
 				break
@@ -27,6 +25,13 @@ func RecurCompareInput(affirmative string , negative string)string{
 
 }
 
+// function scans for user inputs.  Formats and returns the input
+func ScanForInput() string{
+	fmt.Println("Waiting for input...")
+	reader1 := bufio.NewReader(os.Stdin)
+	userInput, _ := reader1.ReadString('\n')
+	return strings.TrimSpace(userInput)
+}
 
 //Prints each key file name to the terminal
 func PrintFileName(n string) {
