@@ -10,21 +10,23 @@ import(
 
 //Container function to wait for user to make one of two selections
 func RecurCompareInput(affirmative string , negative string)string{
-		var myreturn string
-		reader1 := bufio.NewReader(os.Stdin)
-		userInput, _ := reader1.ReadString('\n')
-		theInput := strings.TrimSpace(userInput)
-		switch theInput{
-			case affirmative: Print("The original file will be deleted.")
-				myreturn = affirmative
-			case negative: Print("The original file will NOT be deleted.")
-				myreturn = negative
-			default:
-				fmt.Println("That is not a valid input.  Please type ",affirmative," or ", negative, " to continue.")
-				RecurCompareInput(affirmative, negative)
+		var answer string
+
+		for{
+			reader1 := bufio.NewReader(os.Stdin)
+			userInput, _ := reader1.ReadString('\n')
+			theInput := strings.TrimSpace(userInput)
+			if theInput == affirmative || theInput == negative {
+				answer = theInput
+				break
+			}
+			fmt.Println("That is not a valid input.  Please type ",affirmative," or ", negative, " to continue.")
 		}
-		return myreturn
+
+		return answer
+
 }
+
 
 //Prints each key file name to the terminal
 func PrintFileName(n string) {
